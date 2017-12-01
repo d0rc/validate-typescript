@@ -188,12 +188,5 @@ export function ValidateRecursive<T>(schema: T, input: any, name: string): T {
 }
 
 export function validate<T>(schema: T, input: any, name: string = 'input'): T {
-
-    try {
-        ValidateRecursive(schema, input, name);
-    } catch(ex) {
-        throw new Error(`\n${ex.message}`);
-    }
-
-    return input;
+    return ValidateRecursive(schema, input, name);
 }

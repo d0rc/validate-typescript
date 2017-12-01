@@ -203,13 +203,7 @@ function ValidateRecursive(schema, input, name) {
 }
 exports.ValidateRecursive = ValidateRecursive;
 function validate(schema, input, name = 'input') {
-    try {
-        ValidateRecursive(schema, input, name);
-    }
-    catch (ex) {
-        throw new Error(`\n${ex.message}`);
-    }
-    return input;
+    return ValidateRecursive(schema, input, name);
 }
 exports.validate = validate;
 //# sourceMappingURL=validate.js.map
