@@ -28,7 +28,7 @@ export function ValidateObject<T>(schema: T, input: any, name: string): T {
                     break;
                 } catch (ex) {
                     if ((idx + 1) === schema.length) {
-                        throw new ValidatorError(Array.name, `${name}[${idx}]`, input, 
+                        throw new ValidatorError(Array.name, `${name}[${idx}]`, input,
                         new NotMatchAnyError(input[idx]));
                     }
                 }
@@ -84,7 +84,7 @@ export function ValidateFunction<T extends () => {}>(schema: T, input: any, name
                     ex = (option === ValidationOptions.all) ? ex : new NotMatchAnyError(input);
                     throw new ValidatorError(optionName, name, input, ex);
                 }
-            }            
+            }
         }
     }
 
@@ -100,8 +100,8 @@ export function ValidateFunction<T extends () => {}>(schema: T, input: any, name
 
     return input;
 };
-    
-    
+
+
 export function LiteralString(schema: string, input: any, name: string): string {
     try {
         assert.isString(input);
@@ -164,7 +164,7 @@ export function Unknown<T>(schema: T, input: any, name: string): T {
     throw new ValidatorError(Undefined.name, name, input, new Error('unknown validation error.'));
 };
 
-function ValidateRecursive<T>(schema: T, input: any, name: string): T {
+export function ValidateRecursive<T>(schema: T, input: any, name: string): T {
 
     if (typeof schema === 'object') {
         input = ValidateObject(schema, input, name);
@@ -192,8 +192,8 @@ export function validate<T>(schema: T, input: any, name: string = 'input'): T {
     try {
         ValidateRecursive(schema, input, name);
     } catch(ex) {
-        throw new Error(`\n${ex.message}`);        
-    }   
+        throw new Error(`\n${ex.message}`);
+    }
 
     return input;
 }
